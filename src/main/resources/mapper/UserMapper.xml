@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mr.redis.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.mr.redis.pojo.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="sign" jdbcType="VARCHAR" property="sign" />
+    <result column="classify" jdbcType="VARCHAR" property="classify" />
+    <result column="experience" jdbcType="VARCHAR" property="experience" />
+    <result column="score" jdbcType="VARCHAR" property="score" />
+    <result column="wealth" jdbcType="VARCHAR" property="wealth" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, username, sex, city, sign, classify, experience, score, wealth
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mr.redis.pojo.User">
+    insert into t_user (id, username, sex, 
+      city, sign, classify, 
+      experience, score, wealth
+      )
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, #{classify,jdbcType=VARCHAR}, 
+      #{experience,jdbcType=VARCHAR}, #{score,jdbcType=VARCHAR}, #{wealth,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mr.redis.pojo.User">
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="sign != null">
+        sign,
+      </if>
+      <if test="classify != null">
+        classify,
+      </if>
+      <if test="experience != null">
+        experience,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="wealth != null">
+        wealth,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null">
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="classify != null">
+        #{classify,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null">
+        #{experience,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="wealth != null">
+        #{wealth,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mr.redis.pojo.User">
+    update t_user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null">
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="classify != null">
+        classify = #{classify,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null">
+        experience = #{experience,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="wealth != null">
+        wealth = #{wealth,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mr.redis.pojo.User">
+    update t_user
+    set username = #{username,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=VARCHAR},
+      classify = #{classify,jdbcType=VARCHAR},
+      experience = #{experience,jdbcType=VARCHAR},
+      score = #{score,jdbcType=VARCHAR},
+      wealth = #{wealth,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultType="com.mr.redis.pojo.User" parameterType="com.mr.redis.pojo.User">
+    select * from t_user
+    <where>
+      <if test="username != null and username != ''">
+        AND username = #{username}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectCount" resultType="Integer">
+    select count(*) from t_user
+  </select>
+</mapper>
